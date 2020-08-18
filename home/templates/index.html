@@ -1,17 +1,13 @@
 {% extends "homebase.html" %}
 
-{% block title %} İndex Sayfası {% endblock %}
-{% block keywords %} İndex Sayfası Anahtar Kelimeler {% endblock %}
-{% block description %} İndex Sayfası Açıklama {% endblock %}
+{% block title %} {{ setting.company }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
 
-{% block sidebar %}
-    {% include "sidebar.html" %}
+{% block head %}
+<link rel='shortcut icon' type='image/x-icon' href='{{setting.icon.url}}' />
 {% endblock %}
 
-{% block slider %}
-    {% include "slider.html" %}
-{% endblock %}
-
-{% block content %}
-    {% include "content.html" %}
-{% endblock %}
+{% block sidebar %} {% include "sidebar.html" %} {% endblock %}
+{% block slider %} {% include "slider.html" %} {% endblock %}
+{% block content %} {% include "content.html" %} {% endblock %}

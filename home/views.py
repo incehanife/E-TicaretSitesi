@@ -1,21 +1,37 @@
 from django.contrib import messages
+from django.contrib.auth import logout, authenticate, login
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
+from home.forms import SignUpForm
 from home.models import ContactFormu, ContactFormMessage, Setting
-from product.models import Product, Category
+from product.models import Product, Category, Images
 
 
 def index(request):
     setting = Setting.objects.get(pk=4)
-    sliderdata = Product.objects.all()[:4]
-    category=Category.objects.all()
+    sliderdata = Product.objects.all()[:5]
+    category = Category.objects.all()
+    images = Images.objects.get(pk=9)
+    images1 = Images.objects.get(pk=10)
+    images2 = Images.objects.get(pk=11)
+    images3 = Images.objects.get(pk=16)
+    dayproducts = Product.objects.all()[:7]
+    lastproducts = Product.objects.all().order_by('-id')[:6]
+    randomproducts = Product.objects.all().order_by('?')[:4]
 
     context={'setting': setting,
+             'images': images,
+             'images1': images1,
+             'images3': images3,
+             'images2': images2,
              'category': category,
              'page':'home',
-             'sliderdata':sliderdata}
+             'sliderdata':sliderdata,
+             'dayproducts':dayproducts,
+             'lastproducts':lastproducts,
+             'randomproducts':randomproducts}
     return render(request, 'index.html',context)
 
 def hakkimizda(request):
@@ -61,10 +77,63 @@ def iletisim(request):
 
 def category_products(request,id,slug):
     category = Category.objects.all()
+    categorydata = Category.objects.get(pk=id)
     setting = Setting.objects.get(pk=4)
     products = Product.objects.filter(category_id=id)
-    context = {'products': products,'category': category,'setting': setting}
+    context = {'products': products,
+               'category': category,
+               'setting': setting,
+               'categorydata': categorydata}
     return render(request, 'products.html', context)
+
+def product_detail(request,id,slug):
+    category = Category.objects.all()
+    product = Product.objects.get(pk=id)
+    images = Images.objects.filter(product_id=id)
+    setting = Setting.objects.get(pk=4)
+    context = {'product': product,
+               'setting': setting,
+               'category': category,
+               'images': images}
+    return render(request, 'product_detail.html',context)
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/')
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            # Redirect to a success page.
+            return HttpResponseRedirect('/')
+        else:
+            messages.warning(request, "Login Error! Username or Password is wrong.")
+            return HttpResponseRedirect('/login')
+    setting = Setting.objects.get(pk=4)
+    category = Category.objects.all()
+    context = {'category': category,
+               'setting': setting,}
+    return render(request, 'login.html',context)
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponse("Üye Kaydedildi")
+    form = SignUpForm()
+    setting = Setting.objects.get(pk=4)
+    category = Category.objects.all()
+    context = {'category': category,
+               'form': form,
+               'setting': setting, }
+    return render(request, 'signup.html', context)
+
+
 
 
 

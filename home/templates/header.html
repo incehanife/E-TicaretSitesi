@@ -25,14 +25,41 @@
                 <li><a class="fa fa-twitter" href="https://twitter.com" title="Twitter" target="_blank"></a></li>
                 <li><a class="fa fa-linkedin" href="https://www.linkedin.com" title="LinkedIn" target="_blank"></a></li>
                 <li><a class="fa fa-instagram" href="https://www.instagram.com" title="Instagram" target="_blank"></a></li>
-              </ul>
+
             </div>
           </div>
 
         </div>
       </div>
     </div>
+    <div class="pull-right">
+                <ul class="header-btns">
+                    <!-- Account -->
+                    <li class="header-account dropdown default-dropdown">
+                            {% if user.id is not None %}
+                            <div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
+                                <div class="header-btns-icon">
+                                    <i class="fa fa-user-o"></i>
+                                </div>
+                                <strong class="text-uppercase">{{ user.first_name }} <i class="fa fa-caret-down"></i></strong>
+                            </div>
+                        <ul class="custom-menu">
+                            <li><a href="/user/"><i class="fa fa-user-o"></i> My Account</a></li>
+                            <li><a href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
+                            <li><a href="#"><i class="fa fa-exchange"></i> My Orders </a></li>
+                            <li><a href="#"><i class="fa fa-check"></i> My Commets </a></li>
+                            <li><a href="/logout/"><i class="fa fa-unlock-alt"></i> Logout</a></li>
+                        </ul>
+                        {% else %}
+                            <a href="/login/" class="text-uppercase">Login</a> / <a href="/signup/" class="text-uppercase">Signup</a>
+                        {% endif %}
+
+                    </li>
+                </ul>
+    </div>
+
   </div>
+
   <!-- end header top -->
   <!-- header bottom -->
   <div class="header_bottom">
@@ -52,33 +79,9 @@
             <div id="navbar_menu">
               <ul class="first-ul">
                 <li> <a class="active" href="/">Home</a>  </li>
-
-
-                <li><a href="/hakkimizda/">About Us</a></li>
-                <li> <a href="/referanslar">References</a>
-
-                </li>
-                <li> <a href="">Blog</a>
-                  <ul>
-                    <li><a href={% static 'it_blog.html' %}>Blog List</a></li>
-                    <li><a href={% static 'it_blog_grid.html' %}>Blog Grid</a></li>
-                    <li><a href={% static 'it_blog_detail.html' %}>Blog Detail</a></li>
-                  </ul>
-                </li>
-                <li> <a href="#">Pages</a>
-                  <ul>
-                    <li><a href='#'>Career</a></li>
-                    <li><a href='#'>Pricing</a></li>
-                    <li><a href='#'>Faq</a></li>
-                    <li><a href='#'>Privacy Policy</a></li>
-                    <li><a href='#'>Error 404</a></li>
-                  </ul>
-                </li>
-                <li> <a href="#">Sports Packages</a>
                   {% load mptt_tags %}
-                  <ul>
                     {% recursetree category %}
-                    <li><a href="{% url 'category_products' node.id node.slug %}"  >{{ node.title }} <i class="fa fa-angle-right"></i></a>
+                    <li><a href="{% url 'category_products' node.id node.slug %}">{{ node.title }} </a href="{% url 'category_products' node.id node.slug %}">
                       {% if not node.is_leaf_node %}
                       <ul class="children">
                             <li><a href="#">{{ children }}</a></li>
@@ -86,13 +89,9 @@
                       {% endif %}
                     </li>
                     {% endrecursetree %}
-                    <li><a href='#'>Shop Detail</a></li>
-                    <li><a href='#'>Basket</a></li>
-                    <li><a href='#'>Checkout</a></li>
-                  </ul>
-                </li>
+                <li><a href="/hakkimizda/">About Us</a></li>
+                <li> <a href="/referanslar">References</a></li>
                 <li> <a href="/iletisim">Contact</a> </li>
-
               </ul>
             </div>
             <div class="search_icon">

@@ -1,0 +1,176 @@
+{% extends "iletisimbase.html" %}
+
+{% block title %} Shopcart Package List -  {{ setting.company }} {% endblock %}
+{% block keywords %} {{ setting.keywords }} {% endblock %}
+{% block description %} {{ setting.description }} {% endblock %}
+
+{% block head %}
+<link rel='shortcut icon' type='image/x-icon' href='{{setting.icon.url}}' />
+{% endblock %}
+
+
+{% block sidebar %} {% include "sidebar.html" %} {% endblock %}
+
+{% block content %}
+{% load static %}
+<div id="inner_banner" class="section inner_banner_section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="full">
+          <div class="title-holder">
+            <div class="title-holder-cell text-left">
+              <h1 class="page-title">Shopcart Package List</h1>
+              <ol class="breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li class="active">Shopcart Package List</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end inner page banner -->
+
+<div class="section padding_layout_1 checkout_section">{% if messages %}
+                  {% for message in messages %}
+                      <div class="alert alert-{{message.tags}}" role="alert">
+                            {{ message }}
+                      </div>
+                  {% endfor %}
+              {% endif %}
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="full">
+          <div class="tab-info login-section">
+            <p>Returning customer? <a href="/login/" class="text-uppercase">Click here to login</a></p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+<div>
+  <div>
+    <div class="container">
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="billing-details">
+                <Form action="" method="post">
+                    {% csrf_token %}
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="billing-details">
+
+                            <div class="section-title">
+                                <h4 class="title">Shipping Details</h4>
+                            </div>
+                            <p><label for="id_first_name">First name:</label>
+                                <input type="text" name="first_name"  value="{{ user.first_name }}" class="field_custom" maxlength="10" required id="id_first_name"></p>
+                            <p><label for="id_last_name">Last name:</label>
+                                <input type="text" name="last_name"  value="{{ user.last_name }}" class="field_custom" maxlength="10" required id="id_last_name"></p>
+                            <p><label for="id_address">Address:</label>
+                                <input type="text" name="address" value="{{ profile.address }}" class="field_custom" maxlength="150" id="id_address"></p>
+                            <p><label for="id_phone">Phone:</label>
+                                <input type="text" name="phone"  value="{{ profile.phone }}"  class="field_custom" maxlength="20" id="id_phone"></p>
+                            <p><label for="id_city">City:</label>
+                                <select name="city" class="input" id="id_city">
+                                    <option value="{{ profile.city }}" selected>{{ profile.city }}</option>
+                                    <option value="İstanbul">Istanbul</option>
+                                    <option value="Ankara">Ankara</option>
+                                    <option value="İzmir">Izmir</option>
+                                    <option value="Bursa">Bursa</option>
+                                    <option value="Konya">Konya</option>
+                                    <option value="Yozgat">Yozgat</option>
+                                </select></p>
+                            <p><label for="id_first_name">Country :</label>
+                                <input type="text" name="country" class="field_custom" id="id_country" value="{{ profile.country }}"></p>
+                              <div class="container">
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="billing-details">
+                <Form action="" method="post">
+                            <div class="section-title">
+                                <h4 class="title">Payment Information</h4>
+                            </div>
+                            <p><label for="id_first_name">Total: {{ total }} USD </label>
+                                <input type="text" name="total" class="field_custom" readonly value="${{ total}}"></p>
+                            <p><label for="id_first_name">Credit Card Holder</label>
+                                <input type="text" name="holder" class="field_custom"  value=""></p>
+                            <p><label for="id_first_name">Credit Card Number</label>
+                                <input type="text" name="number" class="field_custom"  value=""></p>
+                            <p><label for="id_first_name">Credit Exp Date/Year</label>
+                                <input type="text" name="ecpdate" class="field_custom"  placeholder="mm/yy"></p>
+                            <p><label for="id_first_name">Security Number</label>
+                                <input type="text" name="secnumber" class="field_custom"  value=""></p>
+
+                  </Form>
+        </div>
+      </div>
+    </div>
+                            <div class="pull-right">
+
+                                <button  type="submit" class="primary-btn">Complete Order</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </Form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br><br><br><br>
+
+
+
+                <div class="col-md-12">
+                    <div class="order-summary clearfix">
+                        <div class="section-title">
+                            <h3 class="title">Shopcart Product List</h3>
+                        </div>
+
+
+                                                <table class="shopping-cart-table table">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Product</th>
+                                <th class="text-center">Price</th>
+                                <th class="text-center">Quantity</th>
+                                <th class="text-center">Total</th>
+                                <th class="text-right"></th>
+                            </tr>
+                            </thead>
+
+                            <tfoot>
+                            <tr>
+                                <th class="empty" colspan="3"></th>
+                                <th>SUBTOTAL</th>
+                                <th colspan="2" class="sub-total">{{ total }} </th>
+                            </tr>
+                            <tr>
+                                <th class="empty" colspan="3"></th>
+                                <th>SHIPING</th>
+                                <td colspan="2">Free Shipping</td>
+                            </tr>
+                            <tr>
+                                <th class="empty" colspan="3"></th>
+                                <th>TOTAL</th>
+                                <th colspan="2" class="total">{{ total }}</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+
+                    </div>
+
+                </div>
+        </div>
+      </div>
+
+
+{% endblock %}

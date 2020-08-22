@@ -31,12 +31,19 @@
         </div>
       </div>
     </div>
+
   </div>
 </div>
 <!-- end inner page banner -->
 <!-- section -->
 <div class="section padding_layout_1 product_detail">
-  <div class="container">
+  <div class="container">{% if messages %}
+                  {% for message in messages %}
+                      <div class="alert alert-{{message.tags}}" role="alert">
+                            {{ message }}
+                      </div>
+                  {% endfor %}
+              {% endif %}
     <div class="row">
       <div class="col-md-9">
         <div class="row">
@@ -62,9 +69,10 @@
               <p>{{ product.description }}<br>
                 <span class="stock">Last 2 places</span> </p>
 
-              <form class="cart" method="post" action="it_cart.html">
+              <form class="cart" action="/order/addtocart/{{ product.id }}" method="post">
+                {% csrf_token %}
                 <div class="quantity">
-                  <input step="1" min="1" max="{{ product.amount }}" name="quantity" value="1" title="Qty" class="input-text qty text"  size="4" type="number">
+                  <input value="1" min="0" max="{{ product.amount }}" name="quantity" value="1" title="Qty" class="input-text qty text"  size="4" type="number">
                 </div>
                 <button type="submit" class="btn sqaure_bt">Add to cart</button>
               </form>
@@ -212,7 +220,7 @@
           <div class="side_bar_blog">
             <h4>GET A QUOTE</h4>
             <p>An duo lorem altera gloriatur. No imperdiet adver sarium pro. No sit sumo lorem. Mei ea eius elitr consequ unturimperdiet.</p>
-            <a class="btn sqaure_bt" href="it_service.html">Contact Us</a> </div>
+            <a class="btn sqaure_bt" href="/iletisim/">Contact Us</a> </div>
 
           </div>
 

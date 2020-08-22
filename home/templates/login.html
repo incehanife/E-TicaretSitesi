@@ -61,6 +61,7 @@
                 <div>
                   <input name="password"  class="field_custom" type="password" placeholder="Password" required />
                 </div>
+                {% csrf_token %}
                 <input href="/login" class="btn main_bt" type="submit" value="Login">
               </form>
             </div>

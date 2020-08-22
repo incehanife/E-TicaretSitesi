@@ -42,9 +42,10 @@
 
 <body>
     {% include 'header.html' %}
-    {% block slider %}{% include 'slider.html' %} {% endblock %}
-    {% block content %}{% include 'content.html' %} {% endblock %}
+    {% block slider %} {% endblock %}
+    {% block body %} {% endblock %}
     {% include 'footer.html' %}
     {% block foot %} {% endblock %}
+
 </body>
 </html>

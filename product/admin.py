@@ -68,7 +68,7 @@ class CategoryAdmin2(DraggableMPTTAdmin):
 class CommentAdmin(admin.ModelAdmin):
     list_display = ['subject','comment','status','create_at']
     list_filter = ['status']
-    readonly_fields = ('subject','comment','ip','user','product','rate','id')
+    readonly_fields = ('subject','comment','ip','user','product')
 
 admin.site.register(Category,CategoryAdmin2)
 admin.site.register(Product,ProductAdmin)

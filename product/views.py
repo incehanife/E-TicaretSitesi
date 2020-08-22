@@ -10,23 +10,20 @@ def index(request):
 
 def addcomment(request,id):
     url = request.META.get('HTTP_REFERER')
-    if request.method == 'POST':  # check post
+    #return HttpResponse(url)
+    if request.method == 'POST':
         form = CommentForm(request.POST)
-
         if form.is_valid():
-            current_user = request.user
-
-            data = Comment()  # create relation with model
-            data.user_id = current_user.id
-            data.product_id = id
+            data = Comment()
             data.subject = form.cleaned_data['subject']
             data.comment = form.cleaned_data['comment']
-            data.rate = form.cleaned_data['rate']
             data.ip = request.META.get('REMOTE_ADDR')
-
-            messages.success(request, "Your review has ben sent. Thank you for your interest.")
-
+            data.product_id =id
+            current_user = request.user
+            data.user_id = current_user.id
+            data.save()
+            messages.success(request, "Your comment has been sent successfully. We thank you.")
             return HttpResponseRedirect(url)
-    messages.warning(request, "Your comment has not been saved. Please check!")
+
 
     return HttpResponseRedirect(url)

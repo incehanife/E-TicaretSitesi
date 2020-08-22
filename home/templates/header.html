@@ -32,31 +32,7 @@
         </div>
       </div>
     </div>
-    <div class="pull-right">
-                <ul class="header-btns">
-                    <!-- Account -->
-                    <li class="header-account dropdown default-dropdown">
-                            {% if user.id is not None %}
-                            <div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
-                                <div class="header-btns-icon">
-                                    <i class="fa fa-user-o"></i>
-                                </div>
-                                <strong class="text-uppercase">{{ user.first_name }} <i class="fa fa-caret-down"></i></strong>
-                            </div>
-                        <ul class="custom-menu">
-                            <li><a href="/user/"><i class="fa fa-user-o"></i> My Account</a></li>
-                            <li><a href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
-                            <li><a href="#"><i class="fa fa-exchange"></i> My Orders </a></li>
-                            <li><a href="#"><i class="fa fa-check"></i> My Commets </a></li>
-                            <li><a href="/logout/"><i class="fa fa-unlock-alt"></i> Logout</a></li>
-                        </ul>
-                        {% else %}
-                            <a href="/login/" class="text-uppercase">Login</a> / <a href="/signup/" class="text-uppercase">Signup</a>
-                        {% endif %}
 
-                    </li>
-                </ul>
-    </div>
 
   </div>
 
@@ -65,14 +41,14 @@
   <div class="header_bottom">
     <div class="container">
       <div class="row">
-        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-1 col-md-12 col-sm-12 col-xs-12">
           <!-- logo start -->
           <div class="logo"> <a href="/"><img src="\uploads\images\log.jpg" alt="logo" ></a> </div>
           <!-- logo end -->
         </div>
 
 
-        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-11 col-md-12 col-sm-12 col-xs-12">
           <!-- menu start -->
 
           <div class="menu_side">
@@ -81,7 +57,7 @@
                 <li> <a class="active" href="/">Home</a>  </li>
                   {% load mptt_tags %}
                     {% recursetree category %}
-                    <li><a href="{% url 'category_products' node.id node.slug %}">{{ node.title }} </a href="{% url 'category_products' node.id node.slug %}">
+                    <li><a href="{% url 'category_products' node.id node.slug %}">{{ node.title }}  <i class="fa fa-caret-down"></i></a href="{% url 'category_products' node.id node.slug %}">
                       {% if not node.is_leaf_node %}
                       <ul class="children">
                             <li><a href="#">{{ children }}</a></li>
@@ -92,6 +68,19 @@
                 <li><a href="/hakkimizda/">About Us</a></li>
                 <li> <a href="/referanslar">References</a></li>
                 <li> <a href="/iletisim">Contact</a> </li>
+                  <li> {% if user.id is not None %} <a> {{ user.first_name }}  <i class="fa fa-caret-down"></i></a>
+                         <ul>
+                            <li><a href="/user/"><i class="fa fa-user-o"></i> My Account</a></li>
+                            <li><a href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
+                            <li><a href="/shopcart/"><i class="fa fa-exchange"></i> My Orders </a></li>
+                            <li><a href="#"><i class="fa fa-check"></i> My Comments </a></li>
+                            <li><a href="/logout/"><i class="fa fa-unlock-alt"></i> Logout</a></li>
+                        </ul>
+                        {% else %}
+                            <li><a href="/login/" class="text-uppercase">Login</a></li>
+                             <li><a href="/signup/" class="text-uppercase">Signup</a></li>
+                        {% endif %}
+                    </li>
               </ul>
             </div>
             <div class="search_icon">

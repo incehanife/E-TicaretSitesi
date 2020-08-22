@@ -5,7 +5,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from home.forms import SignUpForm
-from home.models import ContactFormu, ContactFormMessage, Setting
+from home.models import ContactFormu, ContactFormMessage, Setting, UserProfile
 from product.models import Product, Category, Images
 
 
@@ -17,6 +17,10 @@ def index(request):
     images1 = Images.objects.get(pk=10)
     images2 = Images.objects.get(pk=11)
     images3 = Images.objects.get(pk=16)
+    images4 = Images.objects.get(pk=17)
+    images5 = Images.objects.get(pk=18)
+    images6 = Images.objects.get(pk=19)
+    images7 = Images.objects.get(pk=20)
     dayproducts = Product.objects.all()[:7]
     lastproducts = Product.objects.all().order_by('-id')[:6]
     randomproducts = Product.objects.all().order_by('?')[:4]
@@ -26,6 +30,10 @@ def index(request):
              'images1': images1,
              'images3': images3,
              'images2': images2,
+             'images4': images4,
+             'images5': images5,
+             'images6': images6,
+             'images7': images7,
              'category': category,
              'page':'home',
              'sliderdata':sliderdata,
@@ -124,14 +132,31 @@ def signup_view(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponse("Üye Kaydedildi")
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+
+            current_user = request.user
+            data = UserProfile()
+            data.user_id = current_user.id
+            data.image = "images/users/users.png"
+            data.save()
+            return HttpResponseRedirect('/')
+        else:
+            messages.warning(request, form.errors)
+            return HttpResponseRedirect('/signup')
+
     form = SignUpForm()
-    setting = Setting.objects.get(pk=4)
     category = Category.objects.all()
+    setting = Setting.objects.get(pk=4)
     context = {'category': category,
                'form': form,
-               'setting': setting, }
+               'setting':setting,
+               }
     return render(request, 'signup.html', context)
+
+
 
 
 

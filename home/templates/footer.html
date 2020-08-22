@@ -13,9 +13,9 @@
             </div>
             <p>Hi Sports members can also benefit from additional services such as Power Plate, pilates, yoga, zumba, dance, ozone sauna and massage in addition to the PS System.</p>
             <ul class="social_icons">
-              <li class="social-icon fb"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-              <li class="social-icon tw"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-              <li class="social-icon gp"><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+              <li class="social-icon fb"><a href="{{ setting.facebook }}"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+              <li class="social-icon tw"><a href="{{ setting.twitter }}"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+              <li class="social-icon gp"><a href="{{ setting.email }}"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
             </ul>
           </div>
           <div class="col-md-6">
@@ -46,9 +46,8 @@
             <div class="main-heading left_text">
               <h2>Contact us</h2>
             </div>
-            <p>Kıbrıs Şehitleri Caddesi,<br>
-              Alsancak, İzmir<br>
-              <span style="font-size:18px;"><a href="tel:+9876543210">+987 654 3210</a></span></p>
+            <p>{{ setting.address }}<br>
+              <span style="font-size:18px;"><a href="tel:+9876543210">{{ setting.phone }}</a></span></p>
             <div class="footer_mail-section">
               <form>
                 <fieldset>

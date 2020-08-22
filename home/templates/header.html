@@ -10,8 +10,8 @@
           <div class="full">
             <div class="topbar-left">
               <ul class="list-inline">
-                <li> <span class="topbar-label"><i class="fa  fa-home"></i></span> <span class="topbar-hightlight">Alsancak,Izmir</span> </li>
-                <li> <span class="topbar-label"><i class="fa fa-envelope-o"></i></span> <span class="topbar-hightlight"><a href="mailto:info@yourdomain.com">info@hisports.com</a></span> </li>
+                <li> <span class="topbar-label"><i class="fa  fa-home"></i></span> <span class="topbar-hightlight">{{ setting.address }}</span> </li>
+                <li> <span class="topbar-label"><i class="fa fa-envelope-o"></i></span> <span class="topbar-hightlight"><a href="{{ setting.email }}">{{ setting.email }}</a></span> </li>
               </ul>
             </div>
           </div>
@@ -20,15 +20,16 @@
           <div class="float-left">
             <div class="social_icon">
               <ul class="list-inline">
-                <li><a class="fa fa-facebook" href="https://www.facebook.com/" title="Facebook" target="_blank"></a></li>
-                <li><a class="fa fa-google-plus" href="https://plus.google.com/" title="Google+" target="_blank"></a></li>
-                <li><a class="fa fa-twitter" href="https://twitter.com" title="Twitter" target="_blank"></a></li>
-                <li><a class="fa fa-linkedin" href="https://www.linkedin.com" title="LinkedIn" target="_blank"></a></li>
-                <li><a class="fa fa-instagram" href="https://www.instagram.com" title="Instagram" target="_blank"></a></li>
-
+                <li class="social-icon fb"><a href="{{ setting.facebook }}"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                <li class="social-icon tw"><a href="{{ setting.twitter }}"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                <li class="social-icon gp"><a href="{{ setting.email }}"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                <li><a class="fa fa-instagram" href="{{ setting.instagram }}" title="Instagram" target="_blank"></a></li>
+              </ul>
             </div>
           </div>
-
+          <div class="float-right">
+            <div class="make_appo"> <a class="btn white_btn" href="/shopcart/">My ShopCart</a> </div>
+          </div>
         </div>
       </div>
     </div>
@@ -71,9 +72,9 @@
                   <li> {% if user.id is not None %} <a> {{ user.first_name }}  <i class="fa fa-caret-down"></i></a>
                          <ul>
                             <li><a href="/user/"><i class="fa fa-user-o"></i> My Account</a></li>
-                            <li><a href="#"><i class="fa fa-heart-o"></i> My Wishlist</a></li>
-                            <li><a href="/shopcart/"><i class="fa fa-exchange"></i> My Orders </a></li>
-                            <li><a href="#"><i class="fa fa-check"></i> My Comments </a></li>
+                            <li><a href="/user/favorits"><i class="fa fa-heart-o"></i> My Favorites</a></li>
+                            <li><a href="/user/orders"><i class="fa fa-exchange"></i> My Orders </a></li>
+                            <li><a href="/user/comments"><i class="fa fa-check"></i> My Comments </a></li>
                             <li><a href="/logout/"><i class="fa fa-unlock-alt"></i> Logout</a></li>
                         </ul>
                         {% else %}

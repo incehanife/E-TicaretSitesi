@@ -66,7 +66,7 @@
                 <th class="text-left">Comment</th>
                 <th class="text-left">Status</th>
                 <th class="text-left">Date</th>
-                  <th class="text-left">Delete notification</th>
+                  <th class="text-left">Delete Comment</th>
               </tr>
             </thead>
             <tbody>
@@ -74,12 +74,16 @@
               <tr>
                 </td>
                 <td class="text-left"><p class="price_table">{{ rs.id }}</p></td>
-                <td class="text-left"><p class="price_table">{{ rs.product.title }}</p></td>
-                <td class="text-left"><p class="price_table">{{ rs.subject }}</p></td>
-                <td class="col-sm-3 col-md-3 text-left"><p class="price_table">{{ rs.comment }}</p></td>
-                <td class="col-sm-1 col-md-1 text-left"><p class="price_table">{{ rs.status }}</p></td>
-                <td class="col-sm-1 col-md-1 text-left"><p class="price_table">{{ rs.create_at }}</p></td>
-                <td class="col-sm-1 col-md-1"><a href="#" onclick="return confirm('Delete! Are you sure?')" class="bt_main"><i class="fa fa-trash"></i></a></td>
+                <td class="text-left">
+                    <b><a href="/product/{{ rs.product_id }}/{{ rs.product.slug }}">
+                        <p>{{ rs.product.title }}</p>
+                    </a></b>
+                </td>
+                <td class="text-left"><p >{{ rs.subject }}</p></td>
+                <td class="col-sm-3 col-md-3 text-left"><p >{{ rs.comment }}</p></td>
+                <td class="col-sm-1 col-md-1 text-left"><p >{{ rs.status }}</p></td>
+                <td class="col-sm-1 col-md-1 text-left"><p >{{ rs.create_at }}</p></td>
+                <td class="col-sm-1 col-md-1"><a href="/user/deletecomment/{{ rs.id }}" onclick="return confirm('Delete! Are you sure?')" class="bt_main"><i class="fa fa-trash"></i></a></td>
 
               </tr>
             {% endfor %}

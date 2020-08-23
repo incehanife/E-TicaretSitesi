@@ -67,12 +67,12 @@
             <div class="product-detail-side"> <span><del>${{ product.oldprice }}</del></span><span class="new-price">${{ product.price }}</span> <span class="rating"> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> </span> <span class="review">(5 customer review)</span> </div>
             <div class="detail-contant">
               <p>{{ product.description }}<br>
-                <span class="stock">Last 2 places</span> </p>
+                <span class="stock">Choose how many months of training you want.</span> </p>
 
               <form class="cart" action="/order/addtocart/{{ product.id }}" method="post">
                 {% csrf_token %}
                 <div class="quantity">
-                  <input value="1" min="0" max="{{ product.amount }}" name="quantity" value="1" title="Qty" class="input-text qty text"  size="4" type="number">
+                  <input value="1" min="0" max="12" name="quantity" value="1" title="Qty" class="input-text qty text"  size="4" type="number">
                 </div>
                 <button type="submit" class="btn sqaure_bt">Add to cart</button>
               </form>
@@ -93,7 +93,7 @@
               <div class="tab_bar_section">
                 <ul class="nav nav-tabs" role="tablist">
                   <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#description">Description</a> </li>
-                  <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#reviews">Reviews (2)</a> </li>
+                  <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#reviews">Reviews </a> </li>
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
@@ -104,7 +104,7 @@
                   </div>
                   <div id="reviews" class="tab-pane fade">
                     <div class="product_review">
-                      <h3>Reviews (2)</h3>
+                      <h3>Reviews</h3>
 
                       {% for rs in comments %}
                       <div class="commant-text row">

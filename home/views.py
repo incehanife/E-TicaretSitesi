@@ -13,14 +13,14 @@ def index(request):
     setting = Setting.objects.get(pk=4)
     sliderdata = Product.objects.all()[:5]
     category = Category.objects.all()
-    images = Images.objects.get(pk=9)
-    images1 = Images.objects.get(pk=10)
-    images2 = Images.objects.get(pk=11)
-    images3 = Images.objects.get(pk=16)
-    images4 = Images.objects.get(pk=17)
-    images5 = Images.objects.get(pk=18)
-    images6 = Images.objects.get(pk=19)
-    images7 = Images.objects.get(pk=20)
+    images = Images.objects.get(pk=51)
+    images1 = Images.objects.get(pk=53)
+    images2 = Images.objects.get(pk=52)
+    images3 = Images.objects.get(pk=54)
+    images4 = Images.objects.get(pk=54)
+    images5 = Images.objects.get(pk=55)
+    images6 = Images.objects.get(pk=57)
+    images7 = Images.objects.get(pk=58)
     dayproducts = Product.objects.all()[:7]
     lastproducts = Product.objects.all().order_by('-id')[:6]
     randomproducts = Product.objects.all().order_by('?')[:4]
@@ -45,7 +45,9 @@ def index(request):
 def hakkimizda(request):
     category = Category.objects.all()
     setting = Setting.objects.get(pk=4)
+    images7 = Images.objects.get(pk=58)
     context = {'setting': setting,
+               'images7': images7,
                'category': category}
     return render(request, 'hakkimizda.html', context)
 

@@ -5,7 +5,7 @@ from django.shortcuts import render
 # Create your views here.
 from home.models import Setting, UserProfile
 from order.models import Order
-from product.models import Category
+from product.models import Category, Comment
 
 
 def index(request):
@@ -29,3 +29,24 @@ def orders(request):
                'setting': setting,
                'category': category,}
     return render(request,'user_orders.html',context)
+
+@login_required(login_url='/login')
+def comments(request):
+    setting = Setting.objects.get(pk=4)
+    category = Category.objects.all()
+    current_user = request.user
+    comments = Comment.objects.filter(user_id=current_user.id)
+    context = {'comments': comments,
+               'setting': setting,
+               'category': category, }
+    return render(request, 'user_comments.html', context)
+
+
+
+
+
+
+
+
+
+

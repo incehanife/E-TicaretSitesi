@@ -1,6 +1,6 @@
 {% extends "hakkimizdabase.html" %}
 
-{% block title %} Order List - {{ setting.company }} {% endblock %}
+{% block title %} User Comments - {{ setting.company }} {% endblock %}
 {% block keywords %} {{ setting.keywords }} {% endblock %}
 {% block description %} {{ setting.description }} {% endblock %}
 
@@ -20,10 +20,10 @@
         <div class="full">
           <div class="title-holder">
             <div class="title-holder-cell text-left">
-              <h1 class="page-title">User Orders</h1>
+              <h1 class="page-title">User Comments</h1>
               <ol class="breadcrumb">
                 <li><a href="/">Home</a></li>
-                <li class="active">User Orders</li>
+                <li class="active">User Comments</li>
               </ol>
             </div>
           </div>
@@ -61,23 +61,23 @@
             <thead>
               <tr>
                 <th class="text-left">Id</th>
-                <th class="text-left">First Name</th>
-                <th class="text-left">Last Name</th>
-                <th class="text-left">Total</th>
+                <th class="text-left">Product</th>
+                <th class="text-left">Subject</th>
+                <th class="text-left">Comment</th>
                 <th class="text-left">Status</th>
                 <th class="text-left">Date</th>
-                <th class="text-left">Delete notification</th>
+                  <th class="text-left">Delete notification</th>
               </tr>
             </thead>
             <tbody>
-            {% for rs in orders %}
+            {% for rs in comments %}
               <tr>
                 </td>
                 <td class="text-left"><p class="price_table">{{ rs.id }}</p></td>
-                <td class="text-left"><p class="price_table">{{ rs.first_name }}</p></td>
-                <td class="text-left"><p class="price_table">{{ rs.last_name }}</p></td>
-                <td class="text-left"><p class="price_table">${{ rs.total }}</p></td>
-                <td class="text-left"><p class="price_table">{{ rs.status }}</p></td>
+                <td class="text-left"><p class="price_table">{{ rs.product.title }}</p></td>
+                <td class="text-left"><p class="price_table">{{ rs.subject }}</p></td>
+                <td class="col-sm-3 col-md-3 text-left"><p class="price_table">{{ rs.comment }}</p></td>
+                <td class="col-sm-1 col-md-1 text-left"><p class="price_table">{{ rs.status }}</p></td>
                 <td class="col-sm-1 col-md-1 text-left"><p class="price_table">{{ rs.create_at }}</p></td>
                 <td class="col-sm-1 col-md-1"><a href="#" onclick="return confirm('Delete! Are you sure?')" class="bt_main"><i class="fa fa-trash"></i></a></td>
 

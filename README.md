@@ -1,2 +1,2 @@
-"# Python Spor Salonu Sitesi" 
+"# Python E-Ticaret Sitesi" 
 "# deneme" 
